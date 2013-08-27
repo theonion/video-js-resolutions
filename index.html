@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Video JS Resolutions Example</title>
+
+    <link href="video-js/video-js.min.css" rel="stylesheet" type="text/css" />
+    <link href="video-js-resolutions/video-js-resolutions.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="video-js/video.dev.js"></script>
+    <script type="text/javascript" src="video-js/video-js-resolutions.js"></script>
+
+    <script type="text/javascript">
+      vjs('vid1, {
+        plugins: {
+          resolutions: true
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Video JS Resolutions Example</h1>
+
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup='{}'>
+      <source src="http://cloudfront-secure.vidcaster.com/sites/5760/videos/265051/h264/1280x720.mp4?Expires=1377642732&Signature=jQPHuypI168~SA7g25lFRjfZ5wYMs~FV9cclqxvCgFKrZRvJ-DyQ6UyiDjpY3Y-1xRslQt5vgX8i6rYMptewe8vOBJ0uGcxICAMDcPYEMBzA-FIqmMGj1Ho3ETHSi8r-3UcDWYRtYldmnY1xInlIe0nGwueGDqSc0eqadUIX-Xg_&Key-Pair-Id=APKAJOFE2BBHFF55HRGA" type='video/mp4' data-res="HD" />
+      <source src="http://cloudfront-secure.vidcaster.com/sites/5760/videos/265051/h264br800/480x320.mp4?Expires=1377642732&Signature=rt47vsASVC-zLT2K1hED4CAHwl8MKA-p7dK1xh-TbKPK885jrOLWtBweaj65fOnRYiLCPttd3oUsk~qDzYzj6grWP~~-eergyQSBmG4DiHVKIoGkshCW0u1fGiCW4KSwT1tlPIWZhNHuDTYfXFYbQhV~GpAUZhUDcfv8ByJ1JGY_&Key-Pair-Id=APKAJOFE2BBHFF55HRGA" type='video/mp4' data-res="SD" data-default="true" />
+      <p>Video Playback Not Supported</p>
+    </video>
+  </body>
+</html>
