@@ -6,23 +6,29 @@
     <link href="video-js-resolutions/video-js-resolutions.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="video-js/video.dev.js"></script>
-    <script type="text/javascript" src="video-js/video-js-resolutions.js"></script>
+    <script type="text/javascript" src="video-js-resolutions/video-js-resolutions.js"></script>
+  </head>
+  <body>
+    <h1>Video JS Resolutions Example</h1>
+
+    <p>Currently the videos of the two resolutions are identical, they just differ by a superfluous parameter to fool the player into thinking they're different.  But you can at least see the stream switch over and get a sense for the UI.  If anyone has high res and low res videos hosted that they can contribute to this demo that'd be lovely. Vidcaster's hosted videos are video/mp4 only.</p>
+
+    <video id="home_video" controls preload="none" poster="/img/poster.jpg" width="970" height="404" class="video-js vjs-default-skin">
+      <source src="http://vjs.zencdn.net/v/oceans.mp4?hd" type="video/mp4" data-res="HD" />
+      <source src="http://vjs.zencdn.net/v/oceans.mp4?sd" type="video/mp4" data-res="SD" />
+
+      <source src="http://vjs.zencdn.net/v/oceans.webm?hd" type="video/webm" data-res="HD" />
+      <source src="http://vjs.zencdn.net/v/oceans.webm?sd" type="video/webm" data-res="SD" />
+    </video>
+
 
     <script type="text/javascript">
-      vjs('vid1, {
+      vjs('home_video', {
         plugins: {
           resolutions: true
         }
       });
     </script>
-  </head>
-  <body>
-    <h1>Video JS Resolutions Example</h1>
 
-    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup='{}'>
-      <source src="http://cloudfront-secure.vidcaster.com/sites/5760/videos/265051/h264/1280x720.mp4?Expires=1377642732&Signature=jQPHuypI168~SA7g25lFRjfZ5wYMs~FV9cclqxvCgFKrZRvJ-DyQ6UyiDjpY3Y-1xRslQt5vgX8i6rYMptewe8vOBJ0uGcxICAMDcPYEMBzA-FIqmMGj1Ho3ETHSi8r-3UcDWYRtYldmnY1xInlIe0nGwueGDqSc0eqadUIX-Xg_&Key-Pair-Id=APKAJOFE2BBHFF55HRGA" type='video/mp4' data-res="HD" />
-      <source src="http://cloudfront-secure.vidcaster.com/sites/5760/videos/265051/h264br800/480x320.mp4?Expires=1377642732&Signature=rt47vsASVC-zLT2K1hED4CAHwl8MKA-p7dK1xh-TbKPK885jrOLWtBweaj65fOnRYiLCPttd3oUsk~qDzYzj6grWP~~-eergyQSBmG4DiHVKIoGkshCW0u1fGiCW4KSwT1tlPIWZhNHuDTYfXFYbQhV~GpAUZhUDcfv8ByJ1JGY_&Key-Pair-Id=APKAJOFE2BBHFF55HRGA" type='video/mp4' data-res="SD" data-default="true" />
-      <p>Video Playback Not Supported</p>
-    </video>
   </body>
 </html>
