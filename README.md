@@ -3,6 +3,9 @@ Video JS Resolutions Plugin
 
 Provides resolution switching capabilities for the [VideoJS](https://github.com/videojs/video.js) player.
 
+**Example:**
+http://vidcaster.github.io/video-js-resolutions
+
 **To Use:**
 
 * Include the plugin in the standard way.  See https://github.com/videojs/video.js/blob/master/docs/plugins.md
@@ -39,6 +42,8 @@ Target browsers for this implementation are Chrome, Safari, IE10, Firefox, Andro
 Caveats
 -------
 
-A limitation of the implementation is that only homogeneous video types are resolution switchable. So you can't specify a webm SD and an mp4 HD and expect the player to pick it up.
+Currently only the *dev build* is supported (video.dev.js).  The minified, CDN-hosted version won't work due to the obfuscation of methods by the Closure compiler.  If you need minification you should probably minify your own build.  We'd like to get the distributed, minified, version working with this plugin.
+
+Another limitation of the implementation is that only homogeneous video types are resolution switchable. So you can't specify a webm SD and an mp4 HD and expect the player to pick it up.
 
 I also recommend you include this plugin either on player instantiation or immediately thereafter.  I'm not sure about the reliability of adding the plugin to an instance long after the instance has been active.
