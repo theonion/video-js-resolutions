@@ -282,10 +282,9 @@ videojs.plugin('resolutions', function(options) {
       return this; // basically a no-op
     }
 
-    // remember our position in the current stream
-    var curTime = this.currentTime();
-
-    var pausedBefore = this.paused();
+    // remember our position and playback state
+    var curTime      = this.currentTime();
+    var remainPaused = this.paused();
 
     // pause playback
     this.pause();
@@ -310,7 +309,7 @@ videojs.plugin('resolutions', function(options) {
 
       this.trigger('resolutionchange');
 
-      if (!pausedBefore) {
+      if (!remainPaused) {
         this.load();
         this.play();
       }
