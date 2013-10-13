@@ -282,9 +282,11 @@ videojs.plugin('resolutions', function(options) {
       return this; // basically a no-op
     }
 
-    // remember our position in the current stream
-    var curTime = this.currentTime();
+    // remember our position and playback state
+    var curTime      = this.currentTime();
+    var remainPaused = this.paused();
 
+    // pause playback
     this.pause();
 
     // attempts to stop the download of the existing video
@@ -306,8 +308,11 @@ videojs.plugin('resolutions', function(options) {
       }));
 
       this.trigger('resolutionchange');
-      this.load();
-      this.play();
+
+      if (!remainPaused) {
+        this.load();
+        this.play();
+      }
 
       // remember this selection
       vjs.setLocalStorage('videojs_preferred_res', parseInt(new_source.index, 10));
