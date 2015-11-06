@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "name": "video-js-resolutions",
+  "main": "video-js-resolutions.js",
+  "homepage": "https://github.com/theonion/video-js-resolutions",
+  "authors": [
+    "Onion Product Team <webtech@theonion.com>"
+  ],
+  "description": "A resolution switcher for video.js",
+  "moduleType": [],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
