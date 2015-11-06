@@ -15,7 +15,7 @@ videojs.plugin('resolutions', function(options) {
   // @param {Function} iterator function for collector
   // @param {Array|Object|Number|String} initial collector
   // @return collector
-  vjs.reduce = function(arr, fn, init, n) {
+  function reduce (arr, fn, init, n) {
     if (!arr || arr.length === 0) { return; }
     for (var i=0,j=arr.length; i<j; i++) {
       init = fn.call(arr, init, arr[i], i);
@@ -23,6 +23,25 @@ videojs.plugin('resolutions', function(options) {
     return init;
   };
 
+  function objectEach (object, fn) {
+    for (key in object) {
+      if (object.hasOwnProperty(key)) {
+        fn(key, object[key]);
+      }
+    }
+  };
+  
+  function objectMerge (target, source) {
+    objectEach(source, function (key, value) {
+      target[key] = value;
+    });
+    return target;
+  };
+  
+  function capitalize (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  
   this.resolutions_ = {
     options_: {},
 
@@ -101,7 +120,7 @@ videojs.plugin('resolutions', function(options) {
     //   ]
     // }
     bucketByTypes: function(sources){
-      return vjs.reduce(sources, function(init, val, i){
+      return reduce(sources, function(init, val, i){
         (init[val.type] = init[val.type] || []).push(val);
         return init;
       }, {}, player);
@@ -185,8 +204,8 @@ videojs.plugin('resolutions', function(options) {
       var tech;
 
       for (var i=0,j=player.options_['techOrder'];i<j.length;i++) {
-        techName = videojs.capitalize(j[i]);
-        tech     = window['videojs'][techName];
+        techName = capitalize(j[i]);
+        tech     = videojs[techName];
 
         // Check if the browser supports this technology
         if (tech.isSupported()) {
@@ -233,7 +252,7 @@ videojs.plugin('resolutions', function(options) {
       var supportsLocalStorage = !!window.localStorage;
 
       // check to see if any sources are marked as default
-      videojs.obj.each(typeSources, function(i, s){
+      objectEach(typeSources, function(i, s){
         // add the index here so we can reference it later
         s.index = parseInt(i, 10);
 
@@ -303,9 +322,9 @@ videojs.plugin('resolutions', function(options) {
 
     // when the technology is re-started, kick off the new stream
     this.ready(function() {
-      this.one('loadeddata', vjs.bind(this, function() {
+      this.one('loadeddata', function() {
         this.currentTime(curTime);
-      }));
+      }.bind(this));
 
       this.trigger('resolutionchange');
 
@@ -315,7 +334,7 @@ videojs.plugin('resolutions', function(options) {
       }
 
       // remember this selection
-      vjs.setLocalStorage('videojs_preferred_res', parseInt(new_source.index, 10));
+      window.localStorage.setItem('videojs_preferred_res', parseInt(new_source.index, 10));
     });
   };
 
@@ -330,8 +349,8 @@ videojs.plugin('resolutions', function(options) {
       this.source = options.source;
       this.resolution = options.source['data-res'];
 
-      this.player_.one('loadstart', vjs.bind(this, this.update));
-      this.player_.on('resolutionchange', vjs.bind(this, this.update));
+      this.player_.one('loadstart', this.update.bind(this));
+      this.player_.on('resolutionchange', this.update.bind(this));
     }
   });
 
@@ -379,7 +398,7 @@ videojs.plugin('resolutions', function(options) {
       // Remove the 'touched' class from all control bar buttons with menus to hide any already visible...
       var buttons = document.getElementsByClassName('vjs-menu-button');
       for(var i=0;i<buttons.length;i++){
-        videojs.removeClass(buttons[i], 'touched');
+        buttons[i].classList.remove('touched');
       }
 
       this.removeClass('touched');
@@ -414,7 +433,7 @@ videojs.plugin('resolutions', function(options) {
   ResolutionsButton.prototype.className = 'vjs-resolutions-button';
 
   // Add Button to controlBar
-  videojs.obj.merge(player.controlBar.options_['children'], {
+  objectMerge(player.controlBar.options_['children'], {
     'resolutionsButton': {}
   });
 
